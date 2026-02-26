@@ -43,13 +43,13 @@ export function Hero() {
 
         {/* Headline */}
         <h1 className="text-balance text-center font-[family-name:var(--font-heading)] text-4xl font-bold uppercase leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-          <span className="text-primary">Performance</span> que voce{" "}
+          <span className="text-primary">Performance</span> que você{" "}
           sente na <span className="text-accent">trilha</span>
         </h1>
 
         <p className="mt-6 max-w-xl text-pretty text-center text-lg leading-relaxed text-muted-foreground">
-          Revisao completa de suspensoes, manutencao profissional e preparacao
-          de bikes para qualquer terreno. Sua MTB nas maos de quem entende.
+          Revisão completa de suspensões, manutenção profissional e preparação
+          de bikes para qualquer terreno. Sua MTB nas mãos de quem entende.
         </p>
 
         {/* CTA Buttons */}
@@ -59,7 +59,7 @@ export function Hero() {
               size="lg"
               className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8"
             >
-              Agendar Servico
+              Agendar Serviço
               <ArrowRight className="h-4 w-4" />
             </Button>
           </a>
@@ -69,7 +69,7 @@ export function Hero() {
               variant="outline"
               className="gap-2 border-border text-foreground hover:bg-secondary text-base px-8"
             >
-              Ver Servicos
+              Ver Serviços
             </Button>
           </a>
         </div>
@@ -86,13 +86,13 @@ export function Hero() {
             <p className="font-[family-name:var(--font-heading)] text-3xl font-bold text-primary">
               8+
             </p>
-            <p className="mt-1 text-sm text-muted-foreground">Anos de experiencia</p>
+            <p className="mt-1 text-sm text-muted-foreground">Anos de experiência</p>
           </div>
           <div className="text-center">
             <p className="font-[family-name:var(--font-heading)] text-3xl font-bold text-accent">
               100%
             </p>
-            <p className="mt-1 text-sm text-muted-foreground">Satisfacao</p>
+            <p className="mt-1 text-sm text-muted-foreground">Satisfação</p>
           </div>
         </div>
       </div>

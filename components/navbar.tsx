@@ -6,8 +6,8 @@ import { Menu, X, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
-  { label: "Inicio", href: "#hero" },
-  { label: "Servicos", href: "#servicos" },
+  { label: "Início", href: "#hero" },
+  { label: "Serviços", href: "#servicos" },
   { label: "Sobre", href: "#sobre" },
   { label: "Depoimentos", href: "#depoimentos" },
   { label: "Contato", href: "#contato" },
@@ -64,7 +64,7 @@ export function Navbar() {
         <a href="#contato" className="hidden lg:block">
           <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
             <Phone className="h-4 w-4" />
-            Agendar Servico
+            Agendar Serviço
           </Button>
         </a>
 
@@ -97,7 +97,7 @@ export function Navbar() {
               <a href="#contato" onClick={() => setOpen(false)}>
                 <Button className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
                   <Phone className="h-4 w-4" />
-                  Agendar Servico
+                  Agendar Serviço
                 </Button>
               </a>
             </li>

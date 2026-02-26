@@ -5,22 +5,22 @@ const reasons = [
   {
     icon: ShieldCheck,
     title: "Qualidade Garantida",
-    text: "Usamos apenas pecas originais e de alta qualidade com garantia em todos os servicos.",
+    text: "Usamos apenas peças originais e de alta qualidade com garantia em todos os serviços.",
   },
   {
     icon: Award,
-    title: "Experiencia Comprovada",
-    text: "Mais de 8 anos de experiencia com mountain bikes de todos os niveis.",
+    title: "Experiência Comprovada",
+    text: "Mais de 8 anos de experiência com mountain bikes de todos os níveis.",
   },
   {
     icon: Clock,
     title: "Agilidade",
-    text: "Prazos cumpridos e comunicacao direta para que voce nao fique sem pedalar.",
+    text: "Prazos cumpridos e comunicação direta para que você não fique sem pedalar.",
   },
   {
     icon: ThumbsUp,
     title: "Atendimento Personalizado",
-    text: "Cada bike recebe atencao individual para um resultado perfeito.",
+    text: "Cada bike recebe atenção individual para um resultado perfeito.",
   },
 ]
 
@@ -58,9 +58,9 @@ export function About() {
               Sua bike merece o <span className="text-primary">melhor</span> cuidado
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Na W-BIKE SERVICE, cada bicicleta e tratada com o mesmo cuidado que
-              dedicariamos a nossa propria bike. Somos apaixonados por mountain bike
-              e isso se reflete na qualidade de cada servico.
+              Na W-BIKE SERVICE, cada bicicleta é tratada com o mesmo cuidado que
+              dedicaríamos à nossa própria bike. Somos apaixonados por mountain bike
+              e isso se reflete na qualidade de cada serviço.
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2">

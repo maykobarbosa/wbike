@@ -41,26 +41,26 @@ function ServiceCard({ icon: Icon, title, description, features }: ServiceCardPr
 const services: ServiceCardProps[] = [
   {
     icon: Mountain,
-    title: "Suspensoes",
+    title: "Suspensões",
     description:
-      "Revisao completa de garfos e amortecedores com troca de oleo, retentores e regulagem personalizada.",
+      "Revisão completa de garfos e amortecedores com troca de óleo, retentores e regulagem personalizada.",
     features: [
-      "Revisao de garfo dianteiro",
-      "Revisao de amortecedor traseiro",
-      "Troca de retentores e oleo",
+      "Revisão de garfo dianteiro",
+      "Revisão de amortecedor traseiro",
+      "Troca de retentores e óleo",
       "Regulagem de SAG e rebote",
     ],
   },
   {
     icon: Cog,
-    title: "Manutencao Geral",
+    title: "Manutenção Geral",
     description:
-      "Desde ajuste de cambio ate revisao completa, sua bike fica pronta para qualquer desafio.",
+      "Desde ajuste de câmbio até revisão completa, sua bike fica pronta para qualquer desafio.",
     features: [
-      "Regulagem de cambio e freios",
+      "Regulagem de câmbio e freios",
       "Troca de cabos e conduites",
-      "Centralizacao de rodas",
-      "Lubrificacao completa",
+      "Centralização de rodas",
+      "Lubrificação completa",
     ],
   },
   {
@@ -70,21 +70,21 @@ const services: ServiceCardProps[] = [
       "Montagem profissional de bikes novas e setup personalizado para seu estilo de pilotagem.",
     features: [
       "Montagem de bikes completas",
-      "Setup de suspensao",
+      "Setup de suspensão",
       "Ajuste de cockpit e selim",
-      "Instalacao de acessorios",
+      "Instalação de acessórios",
     ],
   },
   {
     icon: CircleGauge,
-    title: "Preparacao para Trilha",
+    title: "Preparação para Trilha",
     description:
-      "Checklist completo e preparacao da bike para eventos, competicoes e trilhas desafiadoras.",
+      "Checklist completo e preparação da bike para eventos, competições e trilhas desafiadoras.",
     features: [
-      "Check-up pre-trilha completo",
+      "Check-up pré-trilha completo",
       "Tubeless setup",
       "Ajuste fino de componentes",
-      "Consultoria tecnica",
+      "Consultoria técnica",
     ],
   },
 ]
@@ -96,14 +96,14 @@ export function Services() {
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-            Nossos servicos
+            Nossos serviços
           </span>
           <h2 className="mt-3 font-[family-name:var(--font-heading)] text-4xl font-bold uppercase tracking-tight text-foreground md:text-5xl text-balance">
-            Servicos <span className="text-primary">especializados</span> para sua bike
+            Serviços <span className="text-primary">especializados</span> para sua bike
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Cada servico realizado com pecas de qualidade, ferramentas profissionais
-            e atencao total aos detalhes.
+            Cada serviço realizado com peças de qualidade, ferramentas profissionais
+            e atenção total aos detalhes.
           </p>
         </div>
 
@@ -119,31 +119,31 @@ export function Services() {
           <div className="relative overflow-hidden rounded-xl aspect-[16/9]">
             <Image
               src="/images/suspension-service.jpg"
-              alt="Servico de suspensao profissional"
+              alt="Serviço de suspensão profissional"
               fill
               className="object-cover transition-transform duration-500 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
             <div className="absolute bottom-6 left-6">
               <p className="font-[family-name:var(--font-heading)] text-xl font-bold uppercase text-foreground">
-                Revisao de Suspensoes
+                Revisão de Suspensões
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Servico especializado com garantia
+                Serviço especializado com garantia
               </p>
             </div>
           </div>
           <div className="relative overflow-hidden rounded-xl aspect-[16/9]">
             <Image
               src="/images/maintenance.jpg"
-              alt="Manutencao de drivetrain"
+              alt="Manutenção de drivetrain"
               fill
               className="object-cover transition-transform duration-500 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
             <div className="absolute bottom-6 left-6">
               <p className="font-[family-name:var(--font-heading)] text-xl font-bold uppercase text-foreground">
-                Manutencao Completa
+                Manutenção Completa
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Todos os componentes revisados

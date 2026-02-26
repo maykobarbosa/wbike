@@ -17,10 +17,10 @@ export function Footer() {
           {/* Navigation */}
           <nav className="flex flex-wrap justify-center gap-6">
             <a href="#hero" className="text-sm text-muted-foreground transition-colors hover:text-primary">
-              Inicio
+              Início
             </a>
             <a href="#servicos" className="text-sm text-muted-foreground transition-colors hover:text-primary">
-              Servicos
+              Serviços
             </a>
             <a href="#sobre" className="text-sm text-muted-foreground transition-colors hover:text-primary">
               Sobre

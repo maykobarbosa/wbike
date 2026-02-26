@@ -12,11 +12,11 @@ export function Contact() {
               Contato
             </span>
             <h2 className="mt-3 font-[family-name:var(--font-heading)] text-4xl font-bold uppercase tracking-tight text-foreground md:text-5xl text-balance">
-              Agende seu <span className="text-primary">servico</span>
+              Agende seu <span className="text-primary">serviço</span>
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Entre em contato pelo WhatsApp para agendar sua revisao ou tirar
-              suas duvidas. Estamos prontos para atender voce!
+              Entre em contato pelo WhatsApp para agendar sua revisão ou tirar
+              suas dúvidas. Estamos prontos para atender você!
             </p>
 
             <div className="mt-10 flex flex-col gap-6">
@@ -35,7 +35,7 @@ export function Contact() {
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">Endereco</p>
+                  <p className="font-semibold text-foreground">Endereço</p>
                   <p className="mt-1 text-sm text-muted-foreground">
                     Sua cidade - Estado
                   </p>
@@ -47,9 +47,9 @@ export function Contact() {
                   <Clock className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">Horario</p>
+                  <p className="font-semibold text-foreground">Horário</p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Seg - Sex: 08h as 18h | Sab: 08h as 12h
+                    Seg - Sex: 08h às 18h | Sáb: 08h às 12h
                   </p>
                 </div>
               </div>
@@ -78,12 +78,12 @@ export function Contact() {
               Fale conosco pelo WhatsApp
             </h3>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Envie uma mensagem com o modelo da sua bike e o servico desejado.
-              Responderemos o mais rapido possivel!
+              Envie uma mensagem com o modelo da sua bike e o serviço desejado.
+              Responderemos o mais rápido possível!
             </p>
 
             <a
-              href="https://wa.me/559892427859?text=Ola!%20Gostaria%20de%20agendar%20um%20servico%20na%20W-BIKE%20SERVICE."
+              href="https://wa.me/559892427859?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20servi%C3%A7o%20na%20W-BIKE%20SERVICE."
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8"
@@ -107,9 +107,9 @@ export function Contact() {
               <div className="h-8 w-px bg-border" />
               <div className="text-center">
                 <p className="font-[family-name:var(--font-heading)] text-2xl font-bold text-accent">
-                  Gratis
+                  Grátis
                 </p>
-                <p className="text-xs text-muted-foreground">Orcamento sem compromisso</p>
+                <p className="text-xs text-muted-foreground">Orçamento sem compromisso</p>
               </div>
             </div>
           </div>

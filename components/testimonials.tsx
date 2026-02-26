@@ -39,37 +39,37 @@ function TestimonialCard({ quote, name, bike }: TestimonialProps) {
 const testimonials: TestimonialProps[] = [
   {
     quote:
-      "Levei minha Specialized Stumpjumper para revisao de suspensao e o resultado foi impressionante. A bike voltou melhor do que quando era nova! Recomendo demais.",
+      "Levei minha Specialized Stumpjumper para revisão de suspensão e o resultado foi impressionante. A bike voltou melhor do que quando era nova! Recomendo demais.",
     name: "Rafael Costa",
     bike: "Specialized Stumpjumper",
   },
   {
     quote:
-      "Atendimento excelente e muito transparente. Me explicaram tudo que seria feito e o preco foi justo. Minha Trek Fuel EX esta voando na trilha agora.",
+      "Atendimento excelente e muito transparente. Me explicaram tudo que seria feito e o preço foi justo. Minha Trek Fuel EX está voando na trilha agora.",
     name: "Camila Souza",
     bike: "Trek Fuel EX 8",
   },
   {
     quote:
-      "Profissional de verdade! Fez o setup completo da minha bike nova e ainda deu varias dicas sobre regulagem de suspensao. Nota 10!",
+      "Profissional de verdade! Fez o setup completo da minha bike nova e ainda deu várias dicas sobre regulagem de suspensão. Nota 10!",
     name: "Bruno Oliveira",
     bike: "Scott Spark 930",
   },
   {
     quote:
-      "Ja passei por varias oficinas e nenhuma chegou perto da qualidade da W-BIKE SERVICE. Minha Canyon Spectral esta perfeita depois da manutencao geral.",
+      "Já passei por várias oficinas e nenhuma chegou perto da qualidade da W-BIKE SERVICE. Minha Canyon Spectral está perfeita depois da manutenção geral.",
     name: "Juliana Mendes",
     bike: "Canyon Spectral 29",
   },
   {
     quote:
-      "O cara entende de suspensao como ninguem. Fez a revisao do meu Fox 36 e ficou impecavel. Parece outra bike na trilha. Super recomendo.",
+      "O cara entende de suspensão como ninguém. Fez a revisão do meu Fox 36 e ficou impecável. Parece outra bike na trilha. Super recomendo.",
     name: "Thiago Almeida",
     bike: "Giant Trance X",
   },
   {
     quote:
-      "Servico rapido e de altissima qualidade. Deixei pra revisao de manhã e peguei no final do dia, tudo funcionando perfeitamente. Profissional demais!",
+      "Serviço rápido e de altíssima qualidade. Deixei pra revisão de manhã e peguei no final do dia, tudo funcionando perfeitamente. Profissional demais!",
     name: "Fernanda Lima",
     bike: "Cannondale Scalpel",
   },
@@ -88,7 +88,7 @@ export function Testimonials() {
             O que nossos <span className="text-primary">clientes</span> dizem
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            A satisfacao dos nossos clientes e nossa maior motivacao.
+            A satisfação dos nossos clientes é nossa maior motivação.
           </p>
         </div>
 

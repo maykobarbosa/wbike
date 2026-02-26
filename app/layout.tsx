@@ -7,9 +7,9 @@ const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const _oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' })
 
 export const metadata: Metadata = {
-  title: 'W-BIKE SERVICE | Especialista em MTB, Suspensoes e Manutencao',
+  title: 'W-BIKE SERVICE | Especialista em MTB, Suspensões e Manutenção',
   description:
-    'Oficina especializada em mountain bike, revisao de suspensoes, manutencao geral e preparacao de bikes para trilha. Atendimento profissional e pecas de qualidade.',
+    'Oficina especializada em mountain bike, revisão de suspensões, manutenção geral e preparação de bikes para trilha. Atendimento profissional e peças de qualidade.',
 }
 
 export const viewport: Viewport = {
