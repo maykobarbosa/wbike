@@ -1,4 +1,8 @@
+"use client"
+
 import { Star } from "lucide-react"
+import { motion } from "framer-motion"
+import { getStaggerContainer, getStaggerItem } from "@/components/animated-section"
 
 interface TestimonialProps {
   quote: string
@@ -8,7 +12,10 @@ interface TestimonialProps {
 
 function TestimonialCard({ quote, name, bike }: TestimonialProps) {
   return (
-    <div className="flex flex-col rounded-xl border border-border bg-card p-6 lg:p-8">
+    <motion.div
+      variants={getStaggerItem()}
+      className="flex flex-col rounded-xl border border-border bg-card p-6 lg:p-8"
+    >
       {/* Stars */}
       <div className="flex gap-1">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -32,7 +39,7 @@ function TestimonialCard({ quote, name, bike }: TestimonialProps) {
           <p className="text-xs text-muted-foreground">{bike}</p>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -77,10 +84,20 @@ const testimonials: TestimonialProps[] = [
 
 export function Testimonials() {
   return (
-    <section id="depoimentos" className="relative py-24 lg:py-32">
+    <motion.section
+      id="depoimentos"
+      className="relative py-24 lg:py-32"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={getStaggerContainer(0.15, 0.08)}
+    >
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
+        <motion.div
+          className="mx-auto max-w-2xl text-center"
+          variants={getStaggerItem()}
+        >
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
             Depoimentos
           </span>
@@ -90,15 +107,18 @@ export function Testimonials() {
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             A satisfação dos nossos clientes é nossa maior motivação.
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          variants={getStaggerContainer(0.25, 0.06)}
+        >
           {testimonials.map((t) => (
             <TestimonialCard key={t.name} {...t} />
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }

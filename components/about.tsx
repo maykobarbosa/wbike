@@ -1,5 +1,9 @@
+"use client"
+
 import Image from "next/image"
 import { ShieldCheck, Award, Clock, ThumbsUp } from "lucide-react"
+import { motion } from "framer-motion"
+import { getStaggerContainer, getStaggerItem } from "@/components/animated-section"
 
 const reasons = [
   {
@@ -26,11 +30,21 @@ const reasons = [
 
 export function About() {
   return (
-    <section id="sobre" className="relative py-24 lg:py-32 bg-secondary">
+    <motion.section
+      id="sobre"
+      className="relative py-24 lg:py-32 bg-secondary"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={getStaggerContainer(0.1, 0.1)}
+    >
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Image */}
-          <div className="relative overflow-hidden rounded-xl aspect-[4/3]">
+          <motion.div
+            variants={getStaggerItem()}
+            className="relative overflow-hidden rounded-xl aspect-[4/3]"
+          >
             <Image
               src="/images/workshop.jpg"
               alt="Oficina W-BIKE SERVICE"
@@ -47,10 +61,10 @@ export function About() {
                 Oficina especializada em MTB desde 2017
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div>
+          <motion.div variants={getStaggerItem()}>
             <span className="text-xs font-semibold uppercase tracking-widest text-accent">
               Por que nos escolher
             </span>
@@ -78,9 +92,9 @@ export function About() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

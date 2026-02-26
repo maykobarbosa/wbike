@@ -1,13 +1,24 @@
+"use client"
+
 import { Phone, MapPin, Clock, Instagram, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { getStaggerContainer, getStaggerItem } from "@/components/animated-section"
 
 export function Contact() {
   return (
-    <section id="contato" className="relative py-24 lg:py-32 bg-secondary">
+    <motion.section
+      id="contato"
+      className="relative py-24 lg:py-32 bg-secondary"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={getStaggerContainer(0.1, 0.12)}
+    >
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Info */}
-          <div>
+          <motion.div variants={getStaggerItem()}>
             <span className="text-xs font-semibold uppercase tracking-widest text-accent">
               Contato
             </span>
@@ -66,10 +77,13 @@ export function Contact() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA Card */}
-          <div className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-8 text-center lg:p-12">
+          <motion.div
+            variants={getStaggerItem()}
+            className="flex flex-col items-center justify-center rounded-xl border border-border bg-card p-8 text-center lg:p-12"
+          >
             <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <MessageCircle className="h-8 w-8 text-primary" />
             </div>
@@ -112,9 +126,9 @@ export function Contact() {
                 <p className="text-xs text-muted-foreground">Orçamento sem compromisso</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

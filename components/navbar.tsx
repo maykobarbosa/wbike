@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Menu, X, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { motion, AnimatePresence } from "framer-motion"
 
 const navLinks = [
   { label: "Início", href: "#hero" },
@@ -24,12 +25,14 @@ export function Navbar() {
   }, [])
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <motion.header
+      className={`fixed top-0 left-0 right-0 z-50 ${
         scrolled
           ? "border-b border-border/50 bg-background/90 backdrop-blur-xl"
           : "bg-transparent"
       }`}
+      initial={false}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         {/* Logo */}
@@ -79,31 +82,49 @@ export function Navbar() {
       </nav>
 
       {/* Mobile menu */}
-      {open && (
-        <div className="border-t border-border/50 bg-background/95 backdrop-blur-xl lg:hidden">
-          <ul className="flex flex-col gap-1 px-6 py-4">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="border-t border-border/50 bg-background/95 backdrop-blur-xl lg:hidden overflow-hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            <ul className="flex flex-col gap-1 px-6 py-4">
+              {navLinks.map((link, i) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * i, duration: 0.2 }}
                 >
-                  {link.label}
+                  <a
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                </motion.li>
+              ))}
+              <motion.li
+                className="mt-2"
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 * navLinks.length, duration: 0.2 }}
+              >
+                <a href="#contato" onClick={() => setOpen(false)}>
+                  <Button className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
+                    <Phone className="h-4 w-4" />
+                    Agendar Serviço
+                  </Button>
                 </a>
-              </li>
-            ))}
-            <li className="mt-2">
-              <a href="#contato" onClick={() => setOpen(false)}>
-                <Button className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-                  <Phone className="h-4 w-4" />
-                  Agendar Serviço
-                </Button>
-              </a>
-            </li>
-          </ul>
-        </div>
-      )}
-    </header>
+              </motion.li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   )
 }

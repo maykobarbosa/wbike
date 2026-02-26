@@ -1,6 +1,10 @@
+"use client"
+
 import Image from "next/image"
 import { Cog, Mountain, Wrench, CircleGauge, ChevronRight } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
+import { motion } from "framer-motion"
+import { getStaggerContainer, getStaggerItem } from "@/components/animated-section"
 
 interface ServiceCardProps {
   icon: LucideIcon
@@ -11,7 +15,10 @@ interface ServiceCardProps {
 
 function ServiceCard({ icon: Icon, title, description, features }: ServiceCardProps) {
   return (
-    <div className="group relative rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-card/80 lg:p-8">
+    <motion.div
+      variants={getStaggerItem()}
+      className="group relative rounded-xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:bg-card/80 lg:p-8"
+    >
       {/* Glow */}
       <div className="absolute -inset-px rounded-xl bg-primary/5 opacity-0 transition-opacity group-hover:opacity-100" />
 
@@ -34,7 +41,7 @@ function ServiceCard({ icon: Icon, title, description, features }: ServiceCardPr
           ))}
         </ul>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -91,10 +98,20 @@ const services: ServiceCardProps[] = [
 
 export function Services() {
   return (
-    <section id="servicos" className="relative py-24 lg:py-32">
+    <motion.section
+      id="servicos"
+      className="relative py-24 lg:py-32"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={getStaggerContainer(0.2, 0.08)}
+    >
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
+        <motion.div
+          className="mx-auto max-w-2xl text-center"
+          variants={getStaggerItem()}
+        >
           <span className="text-xs font-semibold uppercase tracking-widest text-accent">
             Nossos serviços
           </span>
@@ -105,18 +122,24 @@ export function Services() {
             Cada serviço realizado com peças de qualidade, ferramentas profissionais
             e atenção total aos detalhes.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          variants={getStaggerContainer(0.3, 0.08)}
+        >
           {services.map((s) => (
             <ServiceCard key={s.title} {...s} />
           ))}
-        </div>
+        </motion.div>
 
         {/* Feature images */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
-          <div className="relative overflow-hidden rounded-xl aspect-[16/9]">
+        <motion.div
+          className="mt-16 grid gap-6 md:grid-cols-2"
+          variants={getStaggerContainer(0.2, 0.12)}
+        >
+          <motion.div variants={getStaggerItem()} className="relative overflow-hidden rounded-xl aspect-[16/9]">
             <Image
               src="/images/suspension-service.jpg"
               alt="Serviço de suspensão profissional"
@@ -132,8 +155,8 @@ export function Services() {
                 Serviço especializado com garantia
               </p>
             </div>
-          </div>
-          <div className="relative overflow-hidden rounded-xl aspect-[16/9]">
+          </motion.div>
+          <motion.div variants={getStaggerItem()} className="relative overflow-hidden rounded-xl aspect-[16/9]">
             <Image
               src="/images/maintenance.jpg"
               alt="Manutenção de drivetrain"
@@ -149,9 +172,9 @@ export function Services() {
                 Todos os componentes revisados
               </p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
