@@ -1,55 +1,90 @@
+"use client"
+
+import { useEffect, useLayoutEffect, useState } from "react"
+import { Star } from "lucide-react"
+import { motion } from "framer-motion"
+import { getStaggerContainer, getStaggerItem } from "@/components/animated-section"
+import type { Testimonial } from "@/lib/testimonials"
+import { DEFAULT_TESTIMONIALS } from "@/lib/testimonials"
+
+function TestimonialCard({ quote, name, bike, rating = 5 }: Testimonial) {
+  const stars = Math.min(5, Math.max(1, rating))
+
+  return (
+    <motion.div
+      variants={getStaggerItem()}
+      className="flex flex-col rounded-xl border border-border bg-card p-6 lg:p-8"
+    >
+      {/* Stars */}
+      <div className="flex gap-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star
+            key={i}
+            className={`h-4 w-4 ${
+              i < stars ? "fill-accent text-accent" : "text-muted-foreground/30"
+            }`}
+          />
+        ))}
+      </div>
+
+      <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+        {`"${quote}"`}
+      </blockquote>
+
+      <div className="mt-6 flex items-center gap-3 border-t border-border/50 pt-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+          <span className="text-sm font-bold text-primary">{name.charAt(0)}</span>
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-foreground">{name}</p>
+          <p className="text-xs text-muted-foreground">{bike}</p>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export function Testimonials() {
+  const [dynamicList, setDynamicList] = useState<Testimonial[]>([])
+  const [loaded, setLoaded] = useState(true)
+  const [isTargetSection, setIsTargetSection] = useState(false)
+
   // Refetch when hash is #depoimentos so list updates after client-side nav from form success
   const [hash, setHash] = useState(typeof window !== "undefined" ? window.location.hash : "")
   useEffect(() => {
     if (typeof window === "undefined") return
-    const onHashChange = () => setHash(window.location.hash)
-    window.addEventListener("hashchange", onHashChange)
-    return () => window.removeEventListener("hashchange", onHashChange)
+    const checkHash = () => {
+      const h = window.location.hash
+      setHash(h)
+      setIsTargetSection(h === "#depoimentos")
+    }
+    checkHash()
+    window.addEventListener("hashchange", checkHash)
+    return () => window.removeEventListener("hashchange", checkHash)
   }, [])
+
+  // Sync hash + isTargetSection quando a URL tem #depoimentos (SSR não tem hash; navegação Link pode aplicar hash após o primeiro render)
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return
+    const h = window.location.hash
+    if (h === "#depoimentos") {
+      setIsTargetSection(true)
+      setHash(h)
+    }
+    const t = setTimeout(() => {
+      const h2 = window.location.hash
+      if (h2 === "#depoimentos") {
+        setIsTargetSection(true)
+        setHash(h2)
+      }
+    }, 0)
+    return () => clearTimeout(t)
+  }, [])
+
   useEffect(() => {
-    const navType = typeof performance !== "undefined" && performance.getEntriesByType ? performance.getEntriesByType("navigation")[0]?.type : "unknown"
-    fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        location: "testimonials.tsx:Testimonials",
-        message: "Testimonials component mounted",
-        data: { hypothesisId: "H1", navType, hash },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {})
-  }, [hash])
-  useEffect(() => {
-    const navType = typeof performance !== "undefined" && performance.getEntriesByType ? performance.getEntriesByType("navigation")[0]?.type : "unknown"
-    fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        location: "testimonials.tsx:useEffect",
-        message: "Fetch useEffect running",
-        data: { hypothesisId: "H3", navType },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {})
-    fetch("/api/testimonials")
+    fetch("/api/testimonials", { cache: "no-store" })
       .then((res) => res.json())
       .then((data: Testimonial[]) => {
-        const isArr = Array.isArray(data)
-        fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            location: "testimonials.tsx:fetch.then",
-            message: "API response received",
-            data: {
-              hypothesisId: "H2_H4",
-              isArray: isArr,
-              length: isArr ? data.length : 0,
-              hasData: isArr && data.length > 0,
-            },
-            timestamp: Date.now(),
-          }),
-        }).catch(() => {})
         if (Array.isArray(data)) setDynamicList(data)
       })
       .catch(() => {})
@@ -59,14 +94,18 @@
   const testimonials =
     dynamicList.length > 0 ? [...dynamicList, ...DEFAULT_TESTIMONIALS] : DEFAULT_TESTIMONIALS
 
+  // Quando a seção é alvo do hash (#depoimentos), forçar visível para não depender do scroll
+  const sectionVariants = getStaggerContainer(0.15, 0.08)
+
   return (
     <motion.section
       id="depoimentos"
       className="relative py-24 lg:py-32"
       initial="hidden"
+      animate={isTargetSection ? "visible" : undefined}
       whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
-      variants={getStaggerContainer(0.15, 0.08)}
+      variants={sectionVariants}
     >
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}

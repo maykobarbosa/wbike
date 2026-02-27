@@ -4,6 +4,33 @@ Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH
 
 ---
 
+## [0.2.6] - 2025-02-27
+### Tipo
+- Patch
+
+### Alterações
+- Correção de navegação ao acessar a home a partir da página `/depoimentos`: links do navbar que apontavam para `#hero`, `#servicos`, `#sobre`, `#depoimentos` e `#contato` passaram a usar caminhos absolutos `/#section`, evitando gerar URLs como `/depoimentos#hero` que não possuem essas seções.
+
+---
+
+## [0.2.5] - 2025-02-27
+### Tipo
+- Patch
+
+### Alterações
+- Correção ao clicar em "Ver depoimentos" após cadastrar depoimento: uso de `useLayoutEffect` + `setTimeout(0)` para detectar `#depoimentos` após o primeiro render (navegação Next.js Link pode aplicar o hash depois); ao detectar, define `isTargetSection` e `hash` para exibir a seção e disparar refetch com o novo depoimento.
+
+---
+
+## [0.2.4] - 2025-02-27
+### Tipo
+- Patch
+
+### Alterações
+- Correção da seção de depoimentos ao acessar via link "Depoimentos" ou URL com `#depoimentos`: lista não é mais esvaziada no refetch (removido `setLoaded(false)`); seção passa a forçar estado visível quando o hash é `#depoimentos` (`animate` + `isTargetSection`), evitando depender só do scroll para o Intersection Observer; depoimentos estáticos exibidos desde o primeiro paint (`loaded` inicial `true`).
+
+---
+
 ## [0.2.3] - 2025-02-27
 ### Tipo
 - Patch

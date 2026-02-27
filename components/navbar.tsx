@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 
 const navLinks = [
-  { label: "Início", href: "#hero" },
-  { label: "Serviços", href: "#servicos" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Deixar depoimento", href: "/depoimentos" },
-  { label: "Contato", href: "#contato" },
+  { label: "Início", href: "/#hero" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Depoimentos", href: "/#depoimentos" },
+  // { label: "Deixar depoimento", href: "/depoimentos" },
+  { label: "Contato", href: "/#contato" },
 ]
 
 export function Navbar() {
@@ -37,7 +37,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         {/* Logo */}
-        <a href="#hero" className="shrink-0">
+        <a href="/#hero" className="shrink-0">
           <Image
             src="/images/logo.png"
             alt="W-BIKE SERVICE"
@@ -65,7 +65,7 @@ export function Navbar() {
         </ul>
 
         {/* CTA desktop */}
-        <a href="#contato" className="hidden lg:block">
+        <a href="/#contato" className="hidden lg:block">
           <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
             <Phone className="h-4 w-4" />
             Agendar Serviço
@@ -115,7 +115,7 @@ export function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.05 * navLinks.length, duration: 0.2 }}
               >
-                <a href="#contato" onClick={() => setOpen(false)}>
+                <a href="/#contato" onClick={() => setOpen(false)}>
                   <Button className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
                     <Phone className="h-4 w-4" />
                     Agendar Serviço

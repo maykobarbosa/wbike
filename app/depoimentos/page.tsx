@@ -117,7 +117,7 @@ export default function DepoimentosPage() {
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Button asChild variant="outline">
-                  <Link href="/#depoimentos">Ver depoimentos</Link>
+                  <Link href="/">Voltar</Link>
                 </Button>
                 <Button variant="secondary" onClick={() => setSubmitted(false)}>
                   Enviar outro
