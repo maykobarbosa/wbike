@@ -19,6 +19,18 @@ function toApiTestimonial(row: {
 }
 
 export async function GET() {
+  // #region agent log
+  await fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      location: "api/testimonials/route.ts:GET",
+      message: "GET testimonials API called",
+      data: { hypothesisId: "H2" },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {})
+  // #endregion
   const prisma = getPrisma()
   if (!prisma) return NextResponse.json([])
   try {
@@ -26,6 +38,18 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
       select: { name: true, bike: true, quote: true, rating: true, createdAt: true },
     })
+    // #region agent log
+    await fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "api/testimonials/route.ts:GET",
+        message: "GET returning list",
+        data: { hypothesisId: "H2", count: list.length },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {})
+    // #endregion
     return NextResponse.json(list.map(toApiTestimonial))
   } catch (e) {
     if (String(e).includes("DATABASE_URL") || String(e).includes("SUPABASE_DB_URL")) {

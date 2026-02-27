@@ -37,11 +37,11 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Wenderson Clemente</p>
-                  <p className="mt-1 text-sm text-muted-foreground">+55 98 9242-7859</p>
+                  <p className="mt-1 text-sm text-muted-foreground">+55 98 99242-7859</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              {/* <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
@@ -51,7 +51,7 @@ export function Contact() {
                     Sua cidade - Estado
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
@@ -64,7 +64,8 @@ export function Contact() {
                   </p>
                 </div>
               </div>
-
+              <a href="https://www.instagram.com/wendersonclemente/" target="_blank" rel="noopener noreferrer">
+                
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10">
                   <Instagram className="h-5 w-5 text-accent" />
@@ -72,10 +73,12 @@ export function Contact() {
                 <div>
                   <p className="font-semibold text-foreground">Instagram</p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    @wbikeservice
+                    @wendersonclemente                    
                   </p>
                 </div>
               </div>
+
+              </a>
             </div>
           </motion.div>
 
