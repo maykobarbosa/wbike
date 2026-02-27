@@ -1,0 +1,21 @@
+// Prisma schema – PostgreSQL (Supabase)
+// URLs: prisma.config.ts usa DIRECT_URL (migrations). Runtime usa DATABASE_URL em lib/prisma.ts.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  bike      String
+  quote     String
+  rating    Int      @default(5)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("testimonials")
+}

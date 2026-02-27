@@ -4,6 +4,15 @@ Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH
 
 ---
 
+## [0.2.2] - 2025-02-27
+### Tipo
+- Patch
+
+### Alterações
+- Depoimentos passam a usar **Prisma** para acesso ao banco: schema em `prisma/schema.prisma`, cliente em `lib/prisma.ts` (adapter pg), API em `app/api/testimonials/route.ts`; script `pnpm run create-table` executa `prisma db push`. Removidos `@supabase/supabase-js` e `lib/supabase.ts`.
+
+---
+
 ## [0.2.1] - 2025-02-27
 ### Tipo
 - Patch

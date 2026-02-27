@@ -1,60 +1,47 @@
 import { NextResponse } from "next/server"
 import type { Testimonial } from "@/lib/testimonials"
-import { getSupabase } from "@/lib/supabase"
+import { prisma } from "@/lib/prisma"
 
-const TABLE = "testimonials"
-
-function rowToTestimonial(row: {
+function toApiTestimonial(row: {
   name: string
   bike: string
   quote: string
-  rating: number | null
-  created_at: string
+  rating: number
+  createdAt: Date
 }): Testimonial {
   return {
     name: row.name,
     bike: row.bike,
     quote: row.quote,
-    rating: row.rating ?? 5,
-    createdAt: row.created_at,
+    rating: row.rating,
+    createdAt: row.createdAt.toISOString(),
   }
 }
 
 export async function GET() {
+  if (!prisma) return NextResponse.json([])
   try {
-    const supabase = getSupabase()
-    const { data, error } = await supabase
-      .from(TABLE)
-      .select("name, bike, quote, rating, created_at")
-      .order("created_at", { ascending: false })
-
-    if (error) {
-      console.error("Supabase GET testimonials:", error)
+    const list = await prisma.testimonial.findMany({
+      orderBy: { createdAt: "desc" },
+      select: { name: true, bike: true, quote: true, rating: true, createdAt: true },
+    })
+    return NextResponse.json(list.map(toApiTestimonial))
+  } catch (e) {
+    if (String(e).includes("DATABASE_URL") || String(e).includes("SUPABASE_DB_URL")) {
       return NextResponse.json([])
     }
-    const list = (data ?? []).map(rowToTestimonial)
-    return NextResponse.json(list)
-  } catch (e) {
-    if (String(e).includes("Supabase:")) return NextResponse.json([])
     console.error("GET testimonials:", e)
     return NextResponse.json([])
   }
 }
 
 export async function POST(request: Request) {
-  let supabase
-  try {
-    supabase = getSupabase()
-  } catch (e) {
-    if (String(e).includes("Supabase:")) {
-      return NextResponse.json(
-        { error: "Depoimentos não configurados no servidor (Supabase)." },
-        { status: 503 }
-      )
-    }
-    throw e
+  if (!prisma) {
+    return NextResponse.json(
+      { error: "Depoimentos não configurados no servidor (banco de dados)." },
+      { status: 503 }
+    )
   }
-
   let body: unknown
   try {
     body = await request.json()
@@ -83,20 +70,14 @@ export async function POST(request: Request) {
   const stars = typeof rating === "number" ? Math.min(5, Math.max(1, Math.round(rating))) : 5
 
   try {
-    const { error } = await supabase.from(TABLE).insert({
-      name: name.trim().slice(0, 120),
-      bike: bike.trim().slice(0, 120),
-      quote: quote.trim().slice(0, 800),
-      rating: stars,
+    await prisma.testimonial.create({
+      data: {
+        name: name.trim().slice(0, 120),
+        bike: bike.trim().slice(0, 120),
+        quote: quote.trim().slice(0, 800),
+        rating: stars,
+      },
     })
-
-    if (error) {
-      console.error("Supabase POST testimonial:", error)
-      return NextResponse.json(
-        { error: "Não foi possível salvar o depoimento." },
-        { status: 500 }
-      )
-    }
     return NextResponse.json({ ok: true, message: "Depoimento enviado com sucesso!" })
   } catch (e) {
     console.error("Erro ao salvar depoimento:", e)

@@ -104,8 +104,13 @@ wbike/
 │   ├── footer.tsx      # Rodapé
 │   ├── animated-section.tsx  # Utilitários de animação
 │   └── ui/             # Componentes de interface (shadcn/ui)
+├── prisma/
+│   └── schema.prisma   # Schema do banco (model Testimonial)
+├── lib/
+│   ├── prisma.ts      # Cliente Prisma (singleton)
+│   └── testimonials.ts # Tipos e depoimentos estáticos
 ├── public/
-│   └── images/         # Imagens (logo, hero, workshop, etc.)
+│   └── images/        # Imagens (logo, hero, workshop, etc.)
 ├── package.json
 └── README.md
 ```
@@ -121,28 +126,20 @@ wbike/
 
 ---
 
-## Depoimentos (Supabase)
+## Depoimentos (Prisma + Supabase)
 
-Os depoimentos do formulário (`/depoimentos`) são salvos no **Supabase**. Para ativar:
+Os depoimentos do formulário (`/depoimentos`) são salvos no banco via **Prisma**. A integração **Vercel + Supabase** (Vercel → Project → Settings → Integrations → Supabase) preenche automaticamente as variáveis de ambiente, incluindo:
 
-1. Crie um projeto em [supabase.com](https://supabase.com) e anote a **URL** e a **Service Role Key** (ou Anon Key) em *Settings → API*.
-2. Crie o arquivo `.env.local` na raiz do projeto:
+- **NEXT_SUPABASE_URL_POSTGRES_PRISMA_URL** — usada em runtime (pooler, porta 6543).
+- **NEXT_SUPABASE_URL_POSTGRES_URL_NON_POOLING** — usada pelo Prisma CLI para migrations (porta 5432).
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=sua-service-role-key
+Para criar/sincronizar a tabela `testimonials` (local ou no deploy), use:
+
+```bash
+npx prisma db push
 ```
 
-   Ou, usando a chave anônima com RLS (leitura e inserção públicas):
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-anon-key
-```
-
-3. No **SQL Editor** do Supabase, execute o conteúdo do arquivo `supabase/migrations/20250227000000_create_testimonials.sql` para criar a tabela `testimonials` e as políticas RLS.
-
-Sem essas variáveis, a API retorna lista vazia no GET e 503 no POST; a landing continua exibindo apenas os depoimentos estáticos.
+Sem as variáveis de Postgres configuradas, a API retorna lista vazia no GET e 503 no POST; a landing continua exibindo apenas os depoimentos estáticos.
 
 ---
 
