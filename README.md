@@ -121,6 +121,31 @@ wbike/
 
 ---
 
+## Depoimentos (Supabase)
+
+Os depoimentos do formulário (`/depoimentos`) são salvos no **Supabase**. Para ativar:
+
+1. Crie um projeto em [supabase.com](https://supabase.com) e anote a **URL** e a **Service Role Key** (ou Anon Key) em *Settings → API*.
+2. Crie o arquivo `.env.local` na raiz do projeto:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=sua-service-role-key
+```
+
+   Ou, usando a chave anônima com RLS (leitura e inserção públicas):
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-anon-key
+```
+
+3. No **SQL Editor** do Supabase, execute o conteúdo do arquivo `supabase/migrations/20250227000000_create_testimonials.sql` para criar a tabela `testimonials` e as políticas RLS.
+
+Sem essas variáveis, a API retorna lista vazia no GET e 503 no POST; a landing continua exibindo apenas os depoimentos estáticos.
+
+---
+
 ## Licença
 
 Projeto privado. Todos os direitos reservados.

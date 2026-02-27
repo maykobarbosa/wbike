@@ -1,6 +1,6 @@
 /**
  * Tipos e dados estáticos de depoimentos.
- * Depoimentos enviados pelo formulário são persistidos no Vercel Blob e
+ * Depoimentos enviados pelo formulário são persistidos no Supabase e
  * mesclados com esta lista na landing page.
  */
 
@@ -52,5 +52,3 @@ export const DEFAULT_TESTIMONIALS: Testimonial[] = [
     bike: "Cannondale Scalpel",
   },
 ]
-
-export const BLOB_PATH = "testimonials.json"

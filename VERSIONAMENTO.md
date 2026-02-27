@@ -4,13 +4,22 @@ Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH
 
 ---
 
+## [0.2.1] - 2025-02-27
+### Tipo
+- Patch
+
+### Alterações
+- Persistência de depoimentos migrada de Vercel Blob para **Supabase**: API usa `@supabase/supabase-js`; tabela `testimonials` com RLS para leitura e inserção; migração em `supabase/migrations/`.
+
+---
+
 ## [0.2.0] - 2025-02-27
 ### Tipo
 - Minor
 
 ### Alterações
 - Nova página `/depoimentos` com formulário para o cliente avaliar o serviço e deixar depoimento (nome, modelo da bike, avaliação em estrelas, texto).
-- API `GET/POST /api/testimonials` para listar e persistir depoimentos no Vercel Blob.
+- API `GET/POST /api/testimonials` para listar e persistir depoimentos (Supabase).
 - Seção de depoimentos na landing page passa a exibir depoimentos da API mesclados aos estáticos; botão "Deixar seu depoimento" na seção e link "Deixar depoimento" no navbar.
 
 ---
