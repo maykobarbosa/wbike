@@ -1,10 +1,10 @@
 {
   "name": "my-project",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint .",
     "create-table": "node scripts/create-testimonials-table.mjs",

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import type { Testimonial } from "@/lib/testimonials"
-import { prisma } from "@/lib/prisma"
+import { getPrisma } from "@/lib/prisma"
 
 function toApiTestimonial(row: {
   name: string
@@ -19,6 +19,7 @@ function toApiTestimonial(row: {
 }
 
 export async function GET() {
+  const prisma = getPrisma()
   if (!prisma) return NextResponse.json([])
   try {
     const list = await prisma.testimonial.findMany({
@@ -36,6 +37,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const prisma = getPrisma()
   if (!prisma) {
     return NextResponse.json(
       { error: "Depoimentos não configurados no servidor (banco de dados)." },

@@ -4,6 +4,15 @@ Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH
 
 ---
 
+## [0.2.3] - 2025-02-27
+### Tipo
+- Patch
+
+### Alterações
+- Correção do build no Vercel: cliente Prisma passou a ser obtido via `getPrisma()` (lazy) em vez de import direto, evitando "Failed to collect page data for /api/testimonials"; script de build passa a executar `prisma generate` antes de `next build`.
+
+---
+
 ## [0.2.2] - 2025-02-27
 ### Tipo
 - Patch

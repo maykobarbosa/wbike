@@ -48,4 +48,10 @@ function getPrismaClient(): PrismaClient | null {
   return globalForPrisma.prisma
 }
 
-export const prisma = getPrismaClient()
+/**
+ * Cliente Prisma (lazy). Chamar apenas em runtime (handlers), nunca em build.
+ * Evita "Failed to collect page data" no deploy (Vercel) ao não instanciar o client na importação.
+ */
+export function getPrisma(): PrismaClient | null {
+  return getPrismaClient()
+}
