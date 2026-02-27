@@ -1,0 +1,23 @@
+# Histórico de Versionamento
+
+Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH.
+
+---
+
+## [0.2.0] - 2025-02-27
+### Tipo
+- Minor
+
+### Alterações
+- Nova página `/depoimentos` com formulário para o cliente avaliar o serviço e deixar depoimento (nome, modelo da bike, avaliação em estrelas, texto).
+- API `GET/POST /api/testimonials` para listar e persistir depoimentos no Vercel Blob.
+- Seção de depoimentos na landing page passa a exibir depoimentos da API mesclados aos estáticos; botão "Deixar seu depoimento" na seção e link "Deixar depoimento" no navbar.
+
+---
+
+## [0.1.0] - (inicial)
+### Tipo
+- Minor
+
+### Alterações
+- Landing page W-BIKE SERVICE: hero, serviços, sobre, depoimentos estáticos, contato, footer.

@@ -1,16 +1,15 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Star } from "lucide-react"
 import { motion } from "framer-motion"
 import { getStaggerContainer, getStaggerItem } from "@/components/animated-section"
+import type { Testimonial } from "@/lib/testimonials"
+import { DEFAULT_TESTIMONIALS } from "@/lib/testimonials"
 
-interface TestimonialProps {
-  quote: string
-  name: string
-  bike: string
-}
+function TestimonialCard({ quote, name, bike, rating = 5 }: Testimonial) {
+  const stars = Math.min(5, Math.max(1, rating))
 
-function TestimonialCard({ quote, name, bike }: TestimonialProps) {
   return (
     <motion.div
       variants={getStaggerItem()}
@@ -19,7 +18,12 @@ function TestimonialCard({ quote, name, bike }: TestimonialProps) {
       {/* Stars */}
       <div className="flex gap-1">
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+          <Star
+            key={i}
+            className={`h-4 w-4 ${
+              i < stars ? "fill-accent text-accent" : "text-muted-foreground/30"
+            }`}
+          />
         ))}
       </div>
 
@@ -28,11 +32,8 @@ function TestimonialCard({ quote, name, bike }: TestimonialProps) {
       </blockquote>
 
       <div className="mt-6 flex items-center gap-3 border-t border-border/50 pt-4">
-        {/* Avatar placeholder */}
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-          <span className="text-sm font-bold text-primary">
-            {name.charAt(0)}
-          </span>
+          <span className="text-sm font-bold text-primary">{name.charAt(0)}</span>
         </div>
         <div>
           <p className="text-sm font-semibold text-foreground">{name}</p>
@@ -43,46 +44,23 @@ function TestimonialCard({ quote, name, bike }: TestimonialProps) {
   )
 }
 
-const testimonials: TestimonialProps[] = [
-  {
-    quote:
-      "Levei minha Specialized Stumpjumper para revisão de suspensão e o resultado foi impressionante. A bike voltou melhor do que quando era nova! Recomendo demais.",
-    name: "Rafael Costa",
-    bike: "Specialized Stumpjumper",
-  },
-  {
-    quote:
-      "Atendimento excelente e muito transparente. Me explicaram tudo que seria feito e o preço foi justo. Minha Trek Fuel EX está voando na trilha agora.",
-    name: "Camila Souza",
-    bike: "Trek Fuel EX 8",
-  },
-  {
-    quote:
-      "Profissional de verdade! Fez o setup completo da minha bike nova e ainda deu várias dicas sobre regulagem de suspensão. Nota 10!",
-    name: "Bruno Oliveira",
-    bike: "Scott Spark 930",
-  },
-  {
-    quote:
-      "Já passei por várias oficinas e nenhuma chegou perto da qualidade da W-BIKE SERVICE. Minha Canyon Spectral está perfeita depois da manutenção geral.",
-    name: "Juliana Mendes",
-    bike: "Canyon Spectral 29",
-  },
-  {
-    quote:
-      "O cara entende de suspensão como ninguém. Fez a revisão do meu Fox 36 e ficou impecável. Parece outra bike na trilha. Super recomendo.",
-    name: "Thiago Almeida",
-    bike: "Giant Trance X",
-  },
-  {
-    quote:
-      "Serviço rápido e de altíssima qualidade. Deixei pra revisão de manhã e peguei no final do dia, tudo funcionando perfeitamente. Profissional demais!",
-    name: "Fernanda Lima",
-    bike: "Cannondale Scalpel",
-  },
-]
-
 export function Testimonials() {
+  const [dynamicList, setDynamicList] = useState<Testimonial[]>([])
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((res) => res.json())
+      .then((data: Testimonial[]) => {
+        if (Array.isArray(data)) setDynamicList(data)
+      })
+      .catch(() => {})
+      .finally(() => setLoaded(true))
+  }, [])
+
+  const testimonials =
+    dynamicList.length > 0 ? [...dynamicList, ...DEFAULT_TESTIMONIALS] : DEFAULT_TESTIMONIALS
+
   return (
     <motion.section
       id="depoimentos"
@@ -107,6 +85,14 @@ export function Testimonials() {
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             A satisfação dos nossos clientes é nossa maior motivação.
           </p>
+          <motion.div variants={getStaggerItem()} className="mt-6">
+            <a
+              href="/depoimentos"
+              className="inline-flex items-center gap-2 rounded-md border border-primary/50 bg-primary/5 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+            >
+              Deixar seu depoimento
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* Grid */}
@@ -114,9 +100,13 @@ export function Testimonials() {
           className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           variants={getStaggerContainer(0.25, 0.06)}
         >
-          {testimonials.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
-          ))}
+          {loaded &&
+            testimonials.map((t, i) => (
+              <TestimonialCard
+                key={t.createdAt ? `${t.name}-${t.createdAt}` : `${t.name}-${i}`}
+                {...t}
+              />
+            ))}
         </motion.div>
       </div>
     </motion.section>
