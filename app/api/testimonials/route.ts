@@ -18,45 +18,70 @@ function toApiTestimonial(row: {
   }
 }
 
-export async function GET() {
-  // #region agent log
-  await fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      location: "api/testimonials/route.ts:GET",
-      message: "GET testimonials API called",
-      data: { hypothesisId: "H2" },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {})
-  // #endregion
+const DEFAULT_LIMIT = 9
+const MAX_LIMIT = 50
+
+function paginatedResponse(
+  data: Testimonial[],
+  total: number,
+  averageRating: number,
+  page: number,
+  limit: number,
+) {
+  const totalPages = Math.max(1, Math.ceil(total / limit))
+  return NextResponse.json({
+    data,
+    total,
+    averageRating: Math.round(averageRating * 10) / 10,
+    page,
+    limit,
+    totalPages,
+  })
+}
+
+function emptyPaginatedResponse(page: number, limit: number) {
+  return NextResponse.json({
+    data: [],
+    total: 0,
+    averageRating: 0,
+    page,
+    limit,
+    totalPages: 0,
+  })
+}
+
+export async function GET(request: Request) {
   const prisma = getPrisma()
-  if (!prisma) return NextResponse.json([])
+  if (!prisma) {
+    return emptyPaginatedResponse(1, DEFAULT_LIMIT)
+  }
+  const { searchParams } = new URL(request.url)
+  const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10) || 1)
+  const limit = Math.min(
+    MAX_LIMIT,
+    Math.max(1, parseInt(searchParams.get("limit") ?? String(DEFAULT_LIMIT), 10) || DEFAULT_LIMIT),
+  )
+  const skip = (page - 1) * limit
+
   try {
-    const list = await prisma.testimonial.findMany({
-      orderBy: { createdAt: "desc" },
-      select: { name: true, bike: true, quote: true, rating: true, createdAt: true },
-    })
-    // #region agent log
-    await fetch("http://127.0.0.1:7244/ingest/d9320382-fce8-46de-a120-8375c1ed3cce", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        location: "api/testimonials/route.ts:GET",
-        message: "GET returning list",
-        data: { hypothesisId: "H2", count: list.length },
-        timestamp: Date.now(),
+    const [list, total, agg] = await Promise.all([
+      prisma.testimonial.findMany({
+        orderBy: { createdAt: "desc" },
+        select: { name: true, bike: true, quote: true, rating: true, createdAt: true },
+        skip,
+        take: limit,
       }),
-    }).catch(() => {})
-    // #endregion
-    return NextResponse.json(list.map(toApiTestimonial))
+      prisma.testimonial.count(),
+      prisma.testimonial.aggregate({ _avg: { rating: true } }),
+    ])
+    const averageRating = total > 0 && agg._avg.rating != null ? agg._avg.rating : 0
+    return paginatedResponse(list.map(toApiTestimonial), total, averageRating, page, limit)
   } catch (e) {
     if (String(e).includes("DATABASE_URL") || String(e).includes("SUPABASE_DB_URL")) {
-      return NextResponse.json([])
+      return emptyPaginatedResponse(page, limit)
     }
     console.error("GET testimonials:", e)
-    return NextResponse.json([])
+    return emptyPaginatedResponse(page, limit)
   }
 }
 

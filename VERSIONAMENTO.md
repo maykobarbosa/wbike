@@ -4,6 +4,27 @@ Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH
 
 ---
 
+## [0.3.1] - 2025-02-28
+### Tipo
+- Minor
+
+### Alterações
+- API GET `/api/testimonials`: paginação via query `page` e `limit`; resposta passa a ser `{ data, total, averageRating, page, limit, totalPages }`.
+- Seção de depoimentos: carrega primeira página pela API; botão "Ver mais depoimentos (X de Y)" carrega as próximas páginas e acumula na lista (mobile e desktop).
+
+---
+
+## [0.3.0] - 2025-02-28
+### Tipo
+- Minor
+
+### Alterações
+- Seção de depoimentos: exibição do total de depoimentos e da avaliação média (estrelas).
+- Mobile: carrossel (swipe) com até 6 depoimentos e indicadores de slide; botão "Ver todos os X depoimentos" expande a lista completa na própria seção.
+- Desktop: grid limitado a 9 depoimentos com opção "Ver todos" para expandir.
+
+---
+
 ## [0.2.6] - 2025-02-27
 ### Tipo
 - Patch
