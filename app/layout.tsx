@@ -3,8 +3,8 @@ import { Inter, Oswald } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const _oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' })
+const _inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+const _oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald', display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'W-BIKE SERVICE | Especialista em MTB, Suspensões e Manutenção',

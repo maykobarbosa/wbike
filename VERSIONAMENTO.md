@@ -4,6 +4,15 @@ Este arquivo segue o padrão **Semantic Versioning (SemVer)**: MAJOR.MINOR.PATCH
 
 ---
 
+## [0.4.0] - 2025-03-15
+### Tipo
+- Minor
+
+### Alterações
+- Otimização de performance para Lighthouse: ativação da otimização de imagens do Next.js (WebP/AVIF, tamanhos); fontes com `display: 'swap'`; code splitting com `next/dynamic` para Services, About, Testimonials e Contact (SSR mantido); Hero com `sizes` e `fetchPriority="high"` nas imagens prioritárias.
+
+---
+
 ## [0.3.1] - 2025-02-28
 ### Tipo
 - Minor

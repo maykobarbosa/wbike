@@ -25,6 +25,8 @@ export function Hero() {
           fill
           className="object-cover"
           priority
+          sizes="100vw"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background/70" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/50 to-transparent" />
@@ -47,6 +49,7 @@ export function Hero() {
             height={400}
             className="relative h-auto w-80 mix-blend-screen sm:w-96 md:w-[28rem] lg:w-[32rem]"
             priority
+            sizes="(max-width: 640px) 20rem, (max-width: 768px) 24rem, (max-width: 1024px) 28rem, 32rem"
           />
         </motion.div>
 
