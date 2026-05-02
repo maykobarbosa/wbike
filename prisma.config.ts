@@ -10,7 +10,7 @@ import "dotenv/config"
 import { defineConfig } from "prisma/config"
 
 const directUrl =
-  process.env.NEXT_SUPABASE_URL_POSTGRES_URL_NON_POOLING ||
+  // process.env.NEXT_SUPABASE_URL_POSTGRES_URL_NON_POOLING ||
   process.env.DIRECT_URL ||
   process.env.DATABASE_URL ||
   "postgresql://localhost:5432/dummy"
