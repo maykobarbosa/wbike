@@ -14,7 +14,7 @@ let connectionString =
   process.env.DATABASE_URL ||
   process.env.SUPABASE_DB_URL
 
-const isSupabase = connectionString?.includes("supabase.com")
+const isSupabase = /supabase\.(co|com)/.test(connectionString ?? "")
 
 // Supabase: remover sslmode da URL para o adapter usar apenas ssl: { rejectUnauthorized: false } (evita P1011).
 if (connectionString && isSupabase && connectionString.includes("sslmode=")) {

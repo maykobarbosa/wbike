@@ -17,7 +17,7 @@ if (!connectionString) {
   process.exit(1)
 }
 
-const isSupabase = connectionString.includes("supabase.com")
+const isSupabase = /supabase\.(co|com)/.test(connectionString)
 let url = connectionString
 if (isSupabase && url.includes("sslmode=")) {
   url = url.replace(/\?sslmode=[^&]+&?/, "?").replace(/&sslmode=[^&]+/g, "").replace(/\?&/, "?").replace(/\?$/, "")
